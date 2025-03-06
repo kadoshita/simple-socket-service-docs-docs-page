@@ -1,0 +1,42 @@
+---
+title: Roomの作成
+api:
+  file: openapi.json
+  operationId: createRoom
+order: 100
+---
+
+## **POST** /**rooms**
+
+```bash
+curl --request POST \
+  --url https://api.textchat.example.com/rooms \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "<string>"
+}'
+```
+
+### **Body**
+
+**application/json**
+
+- **name**
+    - **string**
+    - Roomの名前
+
+### **Response**
+
+**201 - application/json**
+
+Roomが作成されました
+
+- **id**
+    - **string**
+    - 作成されたRoomのID
+
+```json
+{
+  "id": "<string>"
+}
+```

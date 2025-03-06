@@ -1,0 +1,228 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "テキストチャットPaaS API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.textchat.example.com"
+    }
+  ],
+  "webhooks": {
+    "/messages": {
+      "post": {
+        "description": "Information about a new plant added to the store",
+        "requestBody": {
+          "description": "Plant added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "The message to be sent"
+                  },
+                  "roomId": {
+                    "type": "string",
+                    "description": "The room ID"
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "description": "The client ID"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return a 200 status to indicate that the data was received successfully"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/rooms": {
+      "post": {
+        "summary": "Roomの作成",
+        "operationId": "createRoom",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Roomの名前"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Roomが作成されました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "作成されたRoomのID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{roomId}": {
+      "delete": {
+        "summary": "Roomの削除",
+        "operationId": "deleteRoom",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Roomが削除されました"
+          }
+        }
+      }
+    },
+    "/rooms/{roomId}/clients": {
+      "post": {
+        "summary": "Clientの作成",
+        "operationId": "createClient",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Clientの名前"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Clientが作成されました",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "作成されたClientのID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{roomId}/clients/{clientId}": {
+      "delete": {
+        "summary": "Clientの削除",
+        "operationId": "deleteClient",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Clientが削除されました"
+          }
+        }
+      }
+    },
+    "/rooms/{roomId}/messages": {
+      "post": {
+        "summary": "テキストデータの送信",
+        "operationId": "sendMessage",
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "送信するテキストデータ"
+                  },
+                  "targetClientId": {
+                    "type": "string",
+                    "description": "Unicastの場合の送信先ClientのID"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "メッセージが送信されました"
+          }
+        }
+      }
+    }
+  }
+}

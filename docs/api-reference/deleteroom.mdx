@@ -1,0 +1,26 @@
+---
+title: Roomの削除
+api:
+  file: openapi.json
+  operationId: deleteRoom
+order: 80
+---
+
+## **DELETE** /**rooms/\{roomId\}**
+
+```bash
+curl --request DELETE \
+  --url https://api.textchat.example.com/rooms/{roomId}
+```
+
+### **Path Parameters**
+
+- **roomId**
+    - **string**
+    - **required**
+
+### **Response**
+
+**204**
+
+Roomが削除されました

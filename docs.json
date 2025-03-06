@@ -1,0 +1,86 @@
+{
+  "name": "Simple Socket Service(S3) Docs",
+  "description": "My documentation site",
+  "sidebar": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        {
+          "title": "Introduction",
+          "href": "/introduction",
+          "icon": "rocket"
+        },
+        {
+          "title": "Overview",
+          "href": "/overview",
+          "icon": "book"
+        },
+        {
+          "title": "Quick Start",
+          "href": "/quickstart",
+          "icon": "flash"
+        }
+      ]
+    },
+    {
+      "group": "Essentials",
+      "pages": [
+        {
+          "title": "Limitation",
+          "href": "/essentials/limitation",
+          "icon": "lock"
+        },
+        {
+          "title": "Security",
+          "href": "/essentials/security",
+          "icon": "shield"
+        },
+        {
+          "title": "Troubleshoot",
+          "href": "/essentials/troubleshoot",
+          "icon": "bug"
+        },
+        {
+          "title": "Support",
+          "href": "/essentials/support",
+          "icon": "question"
+        }
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        {
+          "title": "Create Room",
+          "href": "/api-reference/createroom",
+          "icon": "door-open"
+        },
+        {
+          "title": "Create Client",
+          "href": "/api-reference/createclient",
+          "icon": "user-plus"
+        },
+        {
+          "title": "Delete Room",
+          "href": "/api-reference/deleteroom",
+          "icon": "door-closed"
+        },
+        {
+          "title": "Delete Client",
+          "href": "/api-reference/deleteclient",
+          "icon": "user-minus"
+        },
+        {
+          "title": "Send Message",
+          "href": "/api-reference/sendmessage",
+          "icon": "envelope"
+        },
+        {
+          "title": "Webhook",
+          "href": "/api-reference/postmessage",
+          "icon": "link"
+        }
+      ]
+    }
+  ]
+}

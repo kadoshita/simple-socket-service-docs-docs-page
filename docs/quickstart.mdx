@@ -1,0 +1,181 @@
+---
+title: クイックスタート
+description: クイックスタートの説明
+---
+
+**Step 1**: 認証情報の取得
+
+S3を利用するには、まず認証情報（APIキー）を取得する必要があります。APIキーは管理コンソールから発行できます。
+
+**Step 2**: SDKのインストール
+
+<CodeGroup>
+
+```bash title="JavaScript SDK"
+npm install s3-sdk
+```
+
+```ruby title="iOS SDK"
+pod 'S3SDK', '~> 1.0.0'
+```
+
+```groovy title="Android SDK"
+implementation 'com.example:s3-sdk:1.0.0'
+```
+
+</CodeGroup>
+
+**Step 3**: SDKの初期化
+
+<CodeGroup synchronized>
+
+```javascript title="JavaScript SDK"
+const s3Sdk = new s3Sdk('YOUR_API_KEY');
+```
+
+```swift title="iOS SDK"
+let s3SDK = S3SDK(apiKey: "YOUR_API_KEY")
+```
+
+```java title="Android SDK"
+S3SDK s3SDK = new S3SDK("YOUR_API_KEY");
+```
+
+</CodeGroup>
+
+**Step 4**: Roomの作成
+
+Roomはチャットの単位です。まず初めにRoomを作成します。
+
+<CodeGroup synchronized>
+
+```javascript title="JavaScript SDK"
+const room = await s3Sdk.createRoom('RoomName');
+console.log('Room created:', room.id);
+```
+
+```swift title="iOS SDK"
+s3SDK.createRoom(name: "RoomName") { result in
+    switch result {
+    case .success(let room):
+        print("Room created: \(room.id)")
+    case .failure(let error):
+        print("Failed to create room: \(error)")
+    }
+}
+```
+
+```java title="Android SDK"
+s3SDK.createRoom("RoomName", new S3SDK.Callback<Room>() {
+    @Override
+    public void onSuccess(Room room) {
+        Log.d("S3SDK", "Room created: " + room.getId());
+    }
+
+    @Override
+    public void onError(Exception e) {
+        Log.e("S3SDK", "Failed to create room", e);
+    }
+});
+```
+
+</CodeGroup>
+
+**Step 5**: Clientの作成
+
+次に、Roomに紐づくClientを作成します。Clientはユーザーに相当します。
+
+<CodeGroup synchronized>
+
+```javascript title="JavaScript SDK"
+const client = await s3Sdk.createClient('ClientName', room.id);
+console.log('Client created:', client.id);
+```
+
+```swift title="iOS SDK"
+s3SDK.createClient(roomId: room.id, name: "ClientName") { result in
+    switch result {
+    case .success(let client):
+        print("Client created: \(client.id)")
+    case .failure(let error):
+        print("Failed to create client: \(error)")
+    }
+}
+```
+
+```java title="Android SDK"
+s3SDK.createClient(room.getId(), "ClientName", new S3SDK.Callback<Client>() {
+    @Override
+    public void onSuccess(Client client) {
+        Log.d("S3SDK", "Client created: " + client.getId());
+    }
+
+    @Override
+    public void onError(Exception e) {
+        Log.e("S3SDK", "Failed to create client", e);
+    }
+});
+```
+
+</CodeGroup>
+
+**Step 6**: テキストデータの送信
+
+Clientはテキストデータを送信できます。送信方法はBroadcast（全体送信）とUnicast（個別送信）の2種類があります。
+
+<CodeGroup synchronized>
+
+```javascript title="JavaScript SDK"
+// Broadcast
+room.sendMessage('Hello, everyone!');
+
+// Unicast
+client.sendMessage('Hello, Client!', targetClientId);
+```
+
+```swift title="iOS SDK"
+// Broadcast
+room.sendMessage(message: "Hello, everyone!")
+
+// Unicast
+client.sendMessage(message: "Hello, Client!", targetClientId: targetClientId)
+```
+
+```java title="Android SDK"
+// Broadcast
+room.sendMessage("Hello, everyone!");
+
+// Unicast
+client.sendMessage("Hello, Client!", targetClientId);
+```
+
+</CodeGroup>
+
+**Step 7**: イベントハンドラの設定
+
+各Clientは、Roomに対するBroadcastや自身に対するUnicastでのテキストデータの送信が行われた場合、イベントハンドラを発火させます。
+
+<CodeGroup synchronized>
+
+```javascript title="JavaScript SDK"
+client.onMessage(message => {
+  console.log('New message:', message);
+});
+```
+
+```swift title="iOS SDK"
+client.onMessage() { message in
+    print("New message: \(message.text)")
+}
+```
+
+```java title="Android SDK"
+client.onMessage(new S3SDK.MessageListener() {
+    @Override
+    public void onMessage(Message message) {
+        Log.d("S3SDK", "New message: " + message.getText());
+    }
+});
+```
+
+</CodeGroup>

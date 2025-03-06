@@ -1,0 +1,48 @@
+---
+title: Clientの作成
+api:
+  file: openapi.json
+  operationId: createClient
+order: 90
+---
+
+## **POST** /**rooms/\{roomId\}/clients**
+
+```bash
+curl --request POST \
+  --url https://api.textchat.example.com/rooms/{roomId}/clients \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "<string>"
+}'
+```
+
+### **Path Parameters**
+
+- **roomId**
+    - **string**
+    - **required**
+
+### **Body**
+
+**application/json**
+
+- **name**
+    - **string**
+    - Clientの名前
+
+### **Response**
+
+**201 - application/json**
+
+Clientが作成されました
+
+- **id**
+    - **string**
+    - 作成されたClientのID
+
+```json
+{
+  "id": "<string>"
+}
+```

@@ -1,0 +1,29 @@
+---
+title: Clientの削除
+api:
+  file: openapi.json
+  operationId: deleteClient
+order: 70
+---
+
+## DELETE /rooms/\{roomId\}/clients/\{clientId\}
+
+```bash
+curl --request DELETE \
+  --url https://api.textchat.example.com/rooms/{roomId}/clients/{clientId}
+```
+
+### **Path Parameters**
+
+- **roomId**
+    - **string**
+    - **required**
+- **clientId**
+    - **string**
+    - **required**
+
+### **Response**
+
+**204**
+
+Clientが削除されました

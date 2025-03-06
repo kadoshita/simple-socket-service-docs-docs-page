@@ -1,0 +1,42 @@
+---
+title: テキストデータの送信
+api:
+  file: openapi.json
+  operationId: sendMessage
+order: 60
+---
+
+## **POST** /**rooms/\{roomId\}/messages**
+
+```bash
+curl --request POST \
+  --url https://api.textchat.example.com/rooms/{roomId}/messages \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "message": "<string>",
+  "targetClientId": "<string>"
+}'
+```
+
+### **Path Parameters**
+
+- **roomId**
+    - **string**
+    - **required**
+
+### **Body**
+
+**application/json**
+
+- **message**
+    - **string**
+    - 送信するテキストデータ
+- **targetClientId**
+    - **string**
+    - Unicastの場合の送信先ClientのID
+
+### **Response**
+
+**200**
+
+メッセージが送信されました

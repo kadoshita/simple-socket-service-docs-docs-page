@@ -1,0 +1,43 @@
+---
+title: Webhook
+excerpt: Information about a new plant added to the store
+api:
+  file: openapi.json
+  operationId: post_messages
+  webhook: true
+order: 50
+---
+
+## WEBHOOK /messages
+
+### **Body**
+
+**application/json**
+
+- **message**
+    - **string**
+    - The message to be sent
+- **roomId**
+    - **string**
+    - The room ID
+- **clientId**
+    - **string**
+    - The client ID
+
+```json
+{
+  "example": {
+    "value": {
+      "message": "<string>",
+      "roomId": "<string>",
+      "clientId": "<string>"
+    }
+  }
+}
+```
+
+### **Response**
+
+**200**
+
+Return a 200 status to indicate that the data was received successfully
